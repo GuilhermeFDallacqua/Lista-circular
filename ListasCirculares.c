@@ -29,14 +29,15 @@ no* insereInicio(no *inicio, int valor) {
 }
 
 no* removeInicio(no *inicio) {
-    no *aux;  
+    no *aux = inicio;  
     
     if (inicio == NULL) {      
         printf("\nNao foi possivel remover o ultimo item (lista vazia)\n\n");
         return NULL;
+    } else if (inicio->prox == inicio) {
+        free(aux);
+        return NULL;
     } else {
-        aux = inicio; 
-
         while (aux->prox != inicio) {
             aux = aux->prox;
         }
