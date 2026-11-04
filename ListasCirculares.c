@@ -3,11 +3,9 @@
 # include <conio.h>
 # include <locale.h>
 
-// Aqui to criando o caralho do No com o campo info e o campo de proximo
-
 typedef struct no{
-    int info;        // Campo pra salvar o valor
-    struct no *prox; // Seta que aponto pro proximo da lista
+    int info;  
+    struct no *prox;
 } no;
 
 no* inicializa(){
@@ -15,31 +13,31 @@ no* inicializa(){
 }
 
 no* insereInicio(no *inicio, int valor) {
-    no *novo;                  // Cria o novo no
-    novo = malloc(sizeof(no)); // Aloca a memoria necessaria para o novo no
-    novo->info = valor;        // A informacaoo do novo no recebe o valor do parametro
-    novo->prox = inicio;       // O novo no aponta para o antigo inicio (o no a frente)
-    return novo;               // O novo no vira o inicio da lista
+    no *novo;                  
+    novo = malloc(sizeof(no));
+    novo->info = valor;       
+    novo->prox = inicio;      
+    return novo;     
 }
 
 no* removeInicio(no *inicio) {
-    no *aux;                   // Cria a seta aux para o no
-    if (inicio == NULL) {      // Verifica se o inicio existe
+    no *aux;                  
+    if (inicio == NULL) {      
         printf("\nNao foi possivel remover o ultimo item (lista vazia)\n\n");
     } else {
-        aux = inicio;          // A seta auxiliar aponta para onde a seta inicio aponta
-        inicio = aux->prox;    // A seta inicio comeca a apontar para o proximo do auxiliar
-        free(aux);             // E liberado o no que o auxiliar aponta
+        aux = inicio;          
+        inicio = aux->prox;   
+        free(aux);         
         printf("\nRemovendo o inicio da lista...\n\n");
     };
-    return inicio;             // Retorna o novo inicio da lista de nos
+    return inicio;            
 
 }
 
 int main() {
     setlocale(LC_ALL, "portuguese");
     int valor;
-    char opcao; // String pq e mais facil de validar
+    char opcao; 
     no *inicio = inicializa();
 
     do{
