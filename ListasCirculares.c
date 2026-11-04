@@ -14,24 +14,42 @@ no* inicializa(){
 
 no* insereInicio(no *inicio, int valor) {
     no *novo;                  
+
     novo = malloc(sizeof(no));
-    novo->info = valor;       
-    novo->prox = inicio;      
+    novo->info = valor; 
+    
+    if (inicio == NULL) {
+        novo->prox = novo;
+        return novo;
+    }
+          
+    novo->prox = inicio;
+    inicio->prox = novo;
     return novo;     
 }
 
 no* removeInicio(no *inicio) {
-    no *aux;                  
+    no *aux;  
+    
     if (inicio == NULL) {      
         printf("\nNao foi possivel remover o ultimo item (lista vazia)\n\n");
+        return NULL;
     } else {
-        aux = inicio;          
-        inicio = aux->prox;   
-        free(aux);         
+        aux = inicio; 
+
+        while (aux->prox != inicio) {
+            aux = aux->prox;
+        }
+        
+        inicio = inicio->prox;
+        free(aux->prox);
+        aux->prox = inicio;
+    
         printf("\nRemovendo o inicio da lista...\n\n");
+
+        return inicio;
     };
     return inicio;            
-
 }
 
 int main() {
