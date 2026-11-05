@@ -13,7 +13,7 @@ no* inicializa(){
 }
 
 no* insereInicio(no *inicio, int valor) {
-    no *novo;                  
+    no *novo, *aux = inicio;                  
 
     novo = malloc(sizeof(no));
     novo->info = valor; 
@@ -22,9 +22,15 @@ no* insereInicio(no *inicio, int valor) {
         novo->prox = novo;
         return novo;
     }
-          
+
     novo->prox = inicio;
-    inicio->prox = novo;
+    
+    while (aux->prox != inicio) {
+        aux = aux->prox;
+    }
+
+    aux->prox = novo;
+    
     return novo;     
 }
 
