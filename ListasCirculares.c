@@ -4,7 +4,7 @@
 # include <locale.h>
 
 typedef struct no{
-    int info;  
+    int info;
     struct no *prox;
 } no;
 
@@ -13,56 +13,103 @@ no* inicializa(){
 }
 
 no* insereInicio(no *inicio, int valor) {
-    no *novo, *aux = inicio;                  
+    no *novo, *aux = inicio;
 
     novo = malloc(sizeof(no));
-    novo->info = valor; 
-    
+    novo->info = valor;
+
     if (inicio == NULL) {
         novo->prox = novo;
         return novo;
     }
 
     novo->prox = inicio;
-    
+
     while (aux->prox != inicio) {
         aux = aux->prox;
     }
 
     aux->prox = novo;
-    
-    return novo;     
+
+    return novo;
 }
 
 no* removeInicio(no *inicio) {
-    no *aux = inicio;  
-    
-    if (inicio == NULL) {      
+    no *aux = inicio;
+
+    if (inicio == NULL) {
         printf("\nNao foi possivel remover o ultimo item (lista vazia)\n\n");
         return NULL;
     } else if (inicio->prox == inicio) {
         free(aux);
+        printf("\nRemovendo o inicio da lista...\n\n");
         return NULL;
     } else {
         while (aux->prox != inicio) {
             aux = aux->prox;
         }
-        
+
         inicio = inicio->prox;
         free(aux->prox);
         aux->prox = inicio;
-    
+
         printf("\nRemovendo o inicio da lista...\n\n");
 
         return inicio;
     };
-    return inicio;            
+    return inicio;
+}
+
+no* insereFim(no *inicio, int valor) {
+    no *novo, *aux = inicio;
+
+    novo = malloc(sizeof(no));
+    novo->info = valor;
+
+    if (inicio == NULL) {
+        novo->prox = novo;
+        return novo;
+    }
+
+    novo->prox = inicio;
+
+    while (aux->prox != inicio) {
+        aux = aux->prox;
+    }
+
+    aux->prox = novo;
+
+    return inicio; // Praticamente a mesma funcao de insereInicio. Apenas alterado o return
+}
+
+no* removeFim(no *inicio) {
+    no *aux = inicio;
+
+    if (inicio == NULL) {
+        printf("\nNao foi possivel remover (lista vazia)\n\n");
+        return NULL;
+    } else if (inicio->prox == inicio) {
+        free(inicio);
+        printf("\nRemovendo o final da lista...\n\n");
+        return NULL;
+    } else {
+        while (aux->prox->prox != inicio) {
+            aux = aux->prox;
+        }
+
+        free(aux->prox);
+        aux->prox = inicio;
+
+        printf("\nRemovendo o final da lista...\n\n");
+
+        return inicio;
+    }
 }
 
 int main() {
     setlocale(LC_ALL, "portuguese");
     int valor;
-    char opcao; 
+    char opcao;
     no *inicio = inicializa();
 
     do{
@@ -98,18 +145,26 @@ int main() {
                 system("pause");
                 break;
             case '3':
+                printf("\nDigite o valor a ser inserido no fim: ");
+                scanf("%d", &valor);
+                inicio = insereFim(inicio, valor);
+                printf("Valor inserido com sucesso!\n\n");
                 system("pause");
                 break;
             case '4':
+                inicio = removeFim(inicio);
                 system("pause");
                 break;
             case '5':
+                printf("\nCodigo faltando!!\n\n");
                 system("pause");
                 break;
             case '6':
+                printf("\nCodigo faltando!!\n\n");
                 system("pause");
                 break;
             case '7':
+                printf("\nCodigo faltando!!\n\n");
                 system("pause");
                 break;
 
