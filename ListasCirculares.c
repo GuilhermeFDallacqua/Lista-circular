@@ -12,7 +12,7 @@ no* inicializa(){
     return NULL;
 }
 
-no* insereInicio(no *inicio, int valor) {
+no* insere_inicio(no *inicio, int valor) {
     no *novo, *aux = inicio;
 
     novo = malloc(sizeof(no));
@@ -34,7 +34,7 @@ no* insereInicio(no *inicio, int valor) {
     return novo;
 }
 
-no* removeInicio(no *inicio) {
+no* remove_inicio(no *inicio) {
     no *aux = inicio;
 
     if (inicio == NULL) {
@@ -57,10 +57,9 @@ no* removeInicio(no *inicio) {
 
         return inicio;
     };
-    return inicio;
 }
 
-no* insereFim(no *inicio, int valor) {
+no* insere_fim(no *inicio, int valor) {
     no *novo, *aux = inicio;
 
     novo = malloc(sizeof(no));
@@ -79,10 +78,10 @@ no* insereFim(no *inicio, int valor) {
 
     aux->prox = novo;
 
-    return inicio; // Praticamente a mesma funcao de insereInicio. Apenas alterado o return
+    return inicio;
 }
 
-no* removeFim(no *inicio) {
+no* remove_fim(no *inicio) {
     no *aux = inicio;
 
     if (inicio == NULL) {
@@ -106,9 +105,52 @@ no* removeFim(no *inicio) {
     }
 }
 
+void exibir_lista(no *inicio) {
+    no *aux = inicio;
+
+    if (inicio == NULL) {
+        printf("Lista vazia!\n");
+        return;
+    }
+
+    do {
+        printf("%d", aux->info);
+        aux = aux->prox;
+
+        if (aux != inicio) {
+            printf(" -> ");
+        }
+    } while (aux != inicio);
+
+    printf("\n\n");
+}
+
+no* atualizar_valor(no *inicio, int valor_antigo, int valor_novo) {
+    no *aux = inicio;
+
+    if (inicio == NULL) {
+        printf("Lista vazia!\n");
+        return NULL;
+    }
+
+    do {
+        if (aux->info == valor_antigo) {
+            printf("Valor encontrado, atualizando...\n");
+            aux->info = valor_novo;
+            return inicio;
+        }
+        aux = aux->prox;
+    } while (aux != inicio);
+
+    printf("Valor não encontrado!\n");
+
+    return inicio;
+}
+
 int main() {
     setlocale(LC_ALL, "portuguese");
-    int valor;
+
+    int valor, valor_antigo, valor_novo;
     char opcao;
     no *inicio = inicializa();
 
@@ -136,31 +178,38 @@ int main() {
             case '1':
                 printf("\nDigite o valor a ser inserido no inicio: ");
                 scanf("%d", &valor);
-                inicio = insereInicio(inicio, valor);
+                inicio = insere_inicio(inicio, valor);
                 printf("Valor inserido com sucesso!\n\n");
                 system("pause");
                 break;
             case '2':
-                inicio = removeInicio(inicio);
+                inicio = remove_inicio(inicio);
                 system("pause");
                 break;
             case '3':
                 printf("\nDigite o valor a ser inserido no fim: ");
                 scanf("%d", &valor);
-                inicio = insereFim(inicio, valor);
+                inicio = insere_fim(inicio, valor);
                 printf("Valor inserido com sucesso!\n\n");
                 system("pause");
                 break;
             case '4':
-                inicio = removeFim(inicio);
+                inicio = remove_fim(inicio);
                 system("pause");
                 break;
             case '5':
-                printf("\nCodigo faltando!!\n\n");
+                printf("\n");
+                exibir_lista(inicio);
                 system("pause");
                 break;
             case '6':
-                printf("\nCodigo faltando!!\n\n");
+                printf("\nInsira o valor que deseja atualizar: ");
+                scanf("%d", &valor_antigo);
+
+                printf("Insira o valor substituto: ");
+                scanf("%d", &valor_novo);
+
+                inicio = atualizar_valor(inicio, valor_antigo, valor_novo);
                 system("pause");
                 break;
             case '7':
