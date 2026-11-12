@@ -142,12 +142,12 @@ no* atualizar_valor(no *inicio, int valor_antigo, int valor_novo) {
         aux = aux->prox;
     } while (aux != inicio);
 
-    printf("Valor n„o encontrado!\n");
+    printf("Valor n√£o encontrado!\n");
 
     return inicio;
 }
 
-no* limparTudo(no *inicio) {
+no* limpar_tudo(no *inicio) {
 
     if (inicio == NULL) {
         printf("Lista vazia!\n");
