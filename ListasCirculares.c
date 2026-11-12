@@ -147,6 +147,25 @@ no* atualizar_valor(no *inicio, int valor_antigo, int valor_novo) {
     return inicio;
 }
 
+no* limparTudo(no *inicio) {
+
+    if (inicio == NULL) {
+        printf("Lista vazia!\n");
+        return NULL;
+    }
+
+    no *aux;
+    while (inicio->prox != inicio) {
+        aux = inicio->prox;
+        inicio->prox = aux->prox;
+        free(aux);
+    }
+    free(inicio);
+
+    printf("Memoria liberada com sucesso!\n\n");
+    return NULL;
+}
+
 int main() {
     setlocale(LC_ALL, "portuguese");
 
@@ -213,7 +232,7 @@ int main() {
                 system("pause");
                 break;
             case '7':
-                printf("\nCodigo faltando!!\n\n");
+                inicio = limparTudo(inicio);
                 system("pause");
                 break;
 
