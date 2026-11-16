@@ -232,7 +232,7 @@ int main() {
                 system("pause");
                 break;
             case '7':
-                inicio = limparTudo(inicio);
+                inicio = limpar_tudo(inicio);
                 system("pause");
                 break;
 
